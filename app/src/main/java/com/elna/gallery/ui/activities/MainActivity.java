@@ -5,15 +5,14 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.util.Log;
 
-
 import com.elna.gallery.R;
+import com.elna.gallery.databinding.ActivityMainBinding;
 import com.elna.gallery.model.Photo;
 import com.elna.gallery.network.ApiFactory;
 import com.elna.gallery.ui.adapter.PhotoListAdapter;
 import com.elna.gallery.utils.GalleryItemDecoration;
 import com.elna.gallery.viewmodel.IMainActivityView;
 import com.elna.gallery.viewmodel.MainActivityViewModel;
-import com.elna.gallery.databinding.ActivityMainBinding;
 
 import java.util.List;
 

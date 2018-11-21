@@ -8,13 +8,13 @@ import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
 import com.elna.gallery.R;
+import com.elna.gallery.databinding.ListItemBinding;
 import com.elna.gallery.model.Photo;
+import com.elna.gallery.ui.activities.DetailActivity;
+import com.elna.gallery.utils.Constant;
 
 import java.util.ArrayList;
 import java.util.List;
-import com.elna.gallery.databinding.ListItemBinding;
-import com.elna.gallery.ui.activities.DetailActivity;
-import com.elna.gallery.utils.Constant;
 
 public class PhotoListAdapter extends RecyclerView.Adapter<PhotoListAdapter.PhotoViewHolder> {
 

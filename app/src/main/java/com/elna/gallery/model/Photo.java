@@ -1,9 +1,9 @@
 package com.elna.gallery.model;
+
 import android.databinding.BindingAdapter;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
-import com.elna.gallery.R;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
