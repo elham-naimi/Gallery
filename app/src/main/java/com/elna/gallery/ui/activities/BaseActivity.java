@@ -8,6 +8,8 @@ import android.widget.Toast;
 import com.elna.gallery.viewmodel.BaseViewModel;
 import com.elna.gallery.viewmodel.IView;
 
+import java.io.IOException;
+
 
 public abstract class BaseActivity<B extends ViewDataBinding, T extends BaseViewModel> extends Activity implements IView {
 
@@ -40,6 +42,7 @@ public abstract class BaseActivity<B extends ViewDataBinding, T extends BaseView
 
     @Override
     public void error(Throwable e) {
+
         Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
 
     }

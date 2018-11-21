@@ -33,16 +33,19 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainActivity
 
         bindView(R.layout.activity_main);
 
-        binding.setIsLoading(true);
+
 
         photosAdapter = new PhotoListAdapter();
         binding.recyclerView.setAdapter(photosAdapter);
-        binding.recyclerView.setNestedScrollingEnabled(false);
-        Log.i("TAG","Oncreate"+getResources().getInteger(R.integer.gallery_columns));
+
         binding.recyclerView.setLayoutManager(new GridLayoutManager(this,getResources().getInteger(R.integer.gallery_columns)));
         binding.recyclerView.addItemDecoration(new GalleryItemDecoration(
                 getResources().getDimensionPixelSize(R.dimen.photos_list_spacing),
                 getResources().getInteger(R.integer.gallery_columns)));
+
+
+        binding.setIsLoading(true);
+        initSwipeToRefreshView();
     }
 
     @Override
@@ -51,23 +54,66 @@ public class MainActivity extends BaseActivity<ActivityMainBinding, MainActivity
         viewModel.fetchPhotos();
     }
 
+    private void initSwipeToRefreshView() {
+        binding.swipeRefreshLayout.setEnabled(true);
+        binding.swipeRefreshLayout.setOnRefreshListener(
+                new SwipeRefreshLayout.OnRefreshListener() {
+                    @Override
+                    public void onRefresh() {
+                        Log.i("TAG","called onRefresh");
+                        showRefreshProgressBar();
+                       viewModel.fetchPhotos();
+                    }
+                }
+        );
+    }
+    public void showRefreshProgressBar() {
+        if (binding.swipeRefreshLayout != null &&
+                !binding.swipeRefreshLayout.isRefreshing()) {
+            binding.swipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.swipeRefreshLayout.setRefreshing(true);
+                    binding.swipeRefreshLayout.setEnabled(false);
+                }
+            });
+        }
+    }
+
+    public void hideRefreshProgressBar() {
+        if (binding.swipeRefreshLayout != null &&
+                binding.swipeRefreshLayout.isRefreshing()) {
+            binding.swipeRefreshLayout.post(new Runnable() {
+                @Override
+                public void run() {
+                    binding.swipeRefreshLayout.setRefreshing(false);
+                    binding.swipeRefreshLayout.setEnabled(true);
+                }
+            });
+        }
+    }
+
 
     @Override
     public void load(List<Photo> items) {
         binding.setIsLoading(false);
         photosAdapter.setPhotos(items);
+        hideRefreshProgressBar();
+
     }
 
     @Override
     public void error() {
         super.error();
         binding.setIsLoading(false);
+        hideRefreshProgressBar();
     }
 
     @Override
     public void error(Throwable e) {
         super.error(e);
         binding.setIsLoading(false);
+        hideRefreshProgressBar();
     }
 
 

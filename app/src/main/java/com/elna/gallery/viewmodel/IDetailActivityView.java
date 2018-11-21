@@ -5,7 +5,7 @@ import com.elna.gallery.model.Photo;
 import java.util.List;
 
 /**
- *
+ *  No interactions/method calls from viewmodel to Detail Activity
  *
  */
 
